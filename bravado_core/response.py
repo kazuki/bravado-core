@@ -190,15 +190,10 @@ def validate_response_body(op, response_spec, response):
         response_value = response.json()
         validate_schema_object(
             op.swagger_spec, response_body_spec, response_value)
-    elif response.content_type.startswith("text/"):
+    else:
         # TODO: support some kind of validation for text/* responses
         # TODO: but in the meantime don't raise errors for them
         pass
-    else:
-        # TODO: Expand content-type support for non-json types
-        raise SwaggerMappingError(
-            "Unsupported content-type in response: {0}"
-            .format(response.content_type))
 
 
 def validate_response_headers(op, response_spec, response):
